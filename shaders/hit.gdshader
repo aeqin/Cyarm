@@ -1,0 +1,12 @@
+shader_type canvas_item;
+render_mode unshaded;
+
+uniform vec3 color : source_color = vec3(1, 1, 1);
+uniform float progress : hint_range(0.0, 1.0, 0.1) = 0;
+
+void fragment()
+{
+	float curr_alpha = texture(TEXTURE, UV).a;
+	vec4 target_color = mix(texture(TEXTURE, UV), vec4(color, curr_alpha), progress);
+	COLOR = target_color;
+}
